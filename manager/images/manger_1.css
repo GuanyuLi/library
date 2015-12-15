@@ -1,0 +1,10 @@
+#right li{
+		color: black;
+		font-size: 18px;
+		font-family: '微软雅黑';
+		display: block;
+		width: 720px;
+		height: 50px;
+		line-height:80px;
+		text-align: center;
+}

@@ -1,0 +1,120 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="zh-CN">
+<head>
+<title>用户界面</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="description"  />
+<link rel="stylesheet" href="./reset.css" />
+<link rel="stylesheet" href="./images/li.css" />
+<link rel="stylesheet" href="./images/user_2.css" />
+<script type="text/javascript" src='jquery.js'></script>
+</head>
+    <body>
+    	<div id="container">
+    		<div id="header">
+                <p><a href="http://guanyu.com/">[注销登陆]</a></p>
+    			<p>Welcome,user!<p>
+                <div class="clr"></div>
+    			<h1>图书管理系统</h1>
+    		</div>
+    		<div id ="main">
+    			<div id="left">
+    				<ul>
+    					<li><a href="user_1.html">个人信息</a></li>
+    					<li><a href="user_2.html" style="background:red;">查询图书</a></li>
+    					<li><a href="user_3.html">已借阅图书</a></li>
+    				    <li><a href="user_4.html" >已预约图书</a></li>
+    				</ul>
+    			</div>
+    			<div id="right">
+    				<span  id='searched'><input type='text' name='searched'><input type='button' value='搜索' class='btn'></span>
+                    <table id='listOfBooks'>
+                        <tr id="thead">
+                            <td>图书编号</td>
+                            <td>书名</td>
+                            <td>类别</td>
+                            <td>作者</td>
+                            <td>出版社</td>
+                            <td>单价</td>
+                            <td>数量</td>
+                            <td>操作</td>
+                        </tr>
+                    </table>
+    			</div>
+    		</div>
+    		<div class="clr"></div>
+    		<div id ="footer">
+    			<p>地址：北京市海淀区上园村3号北京交通大学信息中心　邮编：100044　</p>
+    		</div>
+    	</div>
+<script type="text/javascript">
+    var $_GET = (function(){
+    var url = window.document.location.href.toString();
+    var u = url.split("?");
+    if(typeof(u[1]) == "string"){
+        u = u[1].split("&");
+        var get = {};
+        for(var i in u){
+            var j = u[i].split("=");
+            get[j[0]] = j[1];
+        }
+        return get;
+    } else {
+        return {};
+    }
+})();
+    var uid= $_GET['uid'];
+    //alert(uid);
+    var id = $_GET['id'];
+    //alert(id);
+    $('#left a').click(function(){
+        $('a').attr('href',function(uid,origValue){
+            return origValue+'?uid='+uid + '&id=' +id;
+        });
+    });
+    $(function(){
+        $.ajax({
+                    url:'user_2.php',
+                    type:'get',
+                    success:function(data){
+                        $('table[id=listOfBooks]').append(data);
+                        //alert(data);
+                    }
+                });
+            })
+    $('input[type=button]').click(function(){
+                var text = $('input[type=text]').val();
+                $('table tr:not("#thead")').hide().filter(':contains("' + text +'")').show();
+    });
+    $('#right').on('click','.order',function(){
+        var book_id = $(this).parent().parent().children().filter(':first').html();
+        var sendData ={'reader_id':id,'book_id':book_id};
+               $.ajax({
+                    url:'user_order.php',
+                    type:'post',
+                    data:sendData,
+                    success:function(data){
+                        window.location.reload();
+                        if(data == 'done'){
+                            alert('已经预约过该图书了')
+                        }else if(data == 'borrowed'){
+                            alert('已经借阅该图书，无法预约');
+                        }else if(data == 'null'){
+                            alert('不能为空');
+                        }else if (data == 'loss') {
+                            alert('借书证已挂失，无法预约');
+                        }else if(data == 'enough'){
+                            alert('无库存');
+                        }else if(data == 'success'){
+                            alert('预约成功');
+                        }else if(data == 'failure'){
+                            alert('预约失败，请重试');
+                        }else{
+                            alert(data);
+                        }
+                    }
+                });
+    });
+</script>
+    </body>
+</html>

@@ -1,0 +1,136 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="zh-CN">
+<head>
+<title>管理员管理</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="description"  />
+<link rel="stylesheet" href="./reset.css" />
+<link rel="stylesheet" href="./images/li.css" />
+<link rel="stylesheet" href="./images/manager_6.css" />
+<script type="text/javascript" src='jquery.js'></script>
+</head>
+    <body>
+    	<div id="container">
+    		<div id="header">
+                <p><a href="http://guanyu.com/">[注销登陆]</a></p>
+    			<p>Welcome,manager!<p>
+                <div class="clr"></div>
+    			<h1>后台图书管理系统</h1>
+    		</div>
+    		<div id ="main">
+    			<div id="left">
+    				<ul>
+    					<li><a href="manager_1.html">新书入库</a></li>
+    					<li><a href="manager_2.html">办理借书证</a></li>
+    					<li><a href="manager_3.html">图书借阅</a></li>
+    					<li><a href="manager_4.html">图书归还</a></li>
+    					<li><a href="manager_5.html">查看图书或读者信息</a></li>
+    					<li><a href="manager_6.html" style="background:red;">修改读者信息</a></li>
+    					<li><a href="manager_7.html">修改图书信息</a></li>
+    					<li><a href="manager_8.html">图书丢失</a></li>
+    					<li><a href="manager_9.html">借书证丢失</a></li>
+    					<li><a href="manager_10.html">逾期未还图书</a></li>
+                        <li><a href="manager_11.html">读者预约图书</a></li>
+    				</ul>
+    			</div>
+    			<div id="right">
+    				<table  id='reader_info'>
+                        <tr id="thead">
+                        <td>读者编号</td>
+                        <td>姓名</td>
+                        <td>性别</td>
+                        <td>出生日期</td>
+                        <td>证件名称</td>
+                        <td>证件号码</td>
+                        <td>会员等级</td>
+                        <td>办证日期</td>
+                        <td>联系电话</td>
+                        <td>手机号码</td>
+                        <td>操作</td>
+                        </tr>
+                    </table>
+            <form id='form'>
+            <div id="popDiv">
+                
+                <p><strong>读者编号</strong><input type='text' name='reader_id' readonly="readonly" value=''></p>
+                <p><strong>姓&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;名</strong><input type='text' name='reader_name' value=''></p>
+                <p><strong>性&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;别</strong><input type='text' name='sex' value=''></p>
+                <p><strong>出生日期</strong><input type='text' name='birthday' value=''></p>
+                <p><strong>证件名称</strong><input type='text' name='card_name' value=''></p>
+                <p><strong>证件号码</strong><input type='text' name='card_id' value=''></p>
+                <p><strong>会员等级</strong><input type='text' name='level' value=''></p>
+                <p><strong>办证日期</strong><input type='text' name='day' value=''></p>
+                <p><strong>联系电话</strong><input type='text' name='phone' value=''></p>
+                <p><strong>手机号码</strong><input type='text' name='mobile' value=''></p>
+                <p><input type='button' id='ensure' value='确认'><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><input type='button' id='quit' value='取消'></p>
+                
+            </div>
+            </form>
+    			</div>
+    		</div>
+    		<div class="clr"></div>
+    		<div id ="footer">
+    			<p>地址：北京市海淀区上园村3号北京交通大学信息中心　邮编：100044　</p>
+    		</div>
+    	</div>
+<script type="text/javascript">
+    $(function(){
+        $.ajax({
+                    url:'manager_6.php',
+                    type:'get',
+                    success:function(data){
+                        $('table[id=reader_info]').append(data);
+                    }
+                });
+            })
+    $('#right').on('click','.change',function(){
+        var maskHeight = $(document).height();
+        var maskWidth = $(document).width();
+        $('<div class="mask"></div>').appendTo($('body'));
+        $('div.mask').css({
+            'opacity':0.4,
+            'position':'absolute',
+            'background':'#000',
+            'left':0,
+            'top':0,
+            'width':maskWidth,
+            'height':maskHeight,
+            'z-index':2
+        });
+        var arr= [];
+        $(this).parent().siblings().each(function(){
+            arr.push($(this).text());
+        });
+        $('#popDiv').show().children().each(function(i){
+            $(this).children('input[type=text]').val(arr[i]);
+        });
+    });
+    $('#ensure').click(function(){
+        var sendData = $('#form').serialize();
+               $.ajax({
+                    url:'manager_ensure6.php',
+                    type:'post',
+                    data:sendData,
+                    success:function(data){  
+                        if(data == 'success'){
+                            window.location.reload();
+                            alert('修改成功');
+
+                        }else if(data == 'failure'){
+                            alert('修改失败');
+                        }else{
+                            alert(data);
+                        }
+                        
+                    }
+                });
+        
+    });
+    $('#quit').click(function(){
+        $(this).parent().parent().hide();
+        window.location.reload();
+    });
+</script>
+    </body>
+
+</html>

@@ -1,0 +1,62 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="zh-CN">
+<head>
+<title>用户界面</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="description" content="布尔教育 http://www.itbool.com" />
+<link rel="stylesheet" href="./reset.css" />
+<link rel="stylesheet" href="./images/li.css" />
+<script type="text/javascript" src='jquery.js'></script>
+</head>
+    <body>
+    	<div id="container">
+    		<div id="header">
+                <p><a href="http://guanyu.com/">[注销登陆]</a></p>
+    			<p>Welcome,user!<p>
+                <div class="clr"></div>
+    			<h1>图书管理系统</h1>
+    		</div>
+    		<div id ="main">
+    			<div id="left">
+    				<ul>
+    					<li><a href="user_1.html">个人信息</a></li>
+    					<li><a href="user_2.html">查询图书</a></li>
+    					<li><a href="user_3.html">已借阅图书</a></li>
+    				    <li><a href="user_4.html" >已预约图书</a></li>
+    				</ul>
+    			</div>
+    			<div id="right">
+    				<p>请选择您要进行的操作!</p>
+    			</div>
+    		</div>
+    		<div class="clr"></div>
+    		<div id ="footer">
+    			<p>地址：北京市海淀区上园村3号北京交通大学信息中心　邮编：100044　</p>
+    		</div>
+    	</div>
+<script type="text/javascript">
+    var $_GET = (function(){
+    var url = window.document.location.href.toString();
+    var u = url.split("?");
+    if(typeof(u[1]) == "string"){
+        u = u[1].split("&");
+        var get = {};
+        for(var i in u){
+            var j = u[i].split("=");
+            get[j[0]] = j[1];
+        }
+        return get;
+    } else {
+        return {};
+    }
+})();
+    var uid= $_GET['uid'];
+    var id = $_GET['id'];
+    $('#left a').click(function(){
+        $('a').attr('href',function(uid,origValue){
+            return origValue+'?uid='+uid + '&id=' +id;
+        });
+    });
+</script>
+    </body>
+</html>

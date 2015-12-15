@@ -1,0 +1,55 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="zh-CN">
+<head>
+<title>新建网页</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="description" content="布尔教育 http://www.itbool.com" />
+<script type="text/javascript" src='jquery.js'></script>
+<link rel="stylesheet" href="reset.css" />
+<style type="text/css">
+	#container{
+		background: #DDD;
+		margin: 0 auto;
+		width: 600px;
+		height: 1200px;
+	}
+	ul{
+		margin: 300px auto;
+        text-align: center;
+	}
+    li{
+        margin: 10px;
+    }
+    h1{
+        font-size: 35px;
+        text-align: center;
+    }
+</style>
+</head>
+    <body>
+    	<div id="container">
+            <h1 >登录</h1>
+    		<form id='form'>
+    			<ul>
+    				<li>用户名：<input type='text' name='username'></li>
+    				<li>密&nbsp;&nbsp;&nbsp;码：<input type='password' name='password'></li>
+    				<li><input type="button" value='提交'/></li>
+    			</ul>
+    		</form>
+    	</div>
+<script type="text/javascript">
+            $('input[type=button]').click(function(){  
+                var sendData = $('#form').serialize();
+               $.ajax({
+                    url:'a.php',
+                    type:'post',
+                    data:sendData,
+                    success:function(data){
+                        alert(data);
+                    }
+                }); 
+              // window.location.reload();
+            });
+        </script>
+    </body>
+</html>

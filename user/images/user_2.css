@@ -1,0 +1,12 @@
+#searched{
+	text-align: right;
+}
+#listOfBooks table{
+	border: 1px solid #abcdef;
+}
+#listOfBooks td{
+	text-align: center;
+	width:100px;
+	height: 30px;
+	border: 1px solid #abcdef;
+}

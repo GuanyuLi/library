@@ -1,0 +1,89 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="zh-CN">
+<head>
+<title>管理员管理</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="description"  />
+<link rel="stylesheet" href="./reset.css" />
+<link rel="stylesheet" href="./images/li.css" />
+<link rel="stylesheet" href="./images/manager_7.css" />
+<script type="text/javascript" src='jquery.js'></script>
+</head>
+    <body>
+    	<div id="container">
+    		<div id="header">
+                <p><a href="http://guanyu.com/">[注销登陆]</a></p>
+    			<p>Welcome,manager!<p>
+                <div class="clr"></div>
+    			<h1>后台图书管理系统</h1>
+    		</div>
+    		<div id ="main">
+    			<div id="left">
+    				<ul>
+    					<li><a href="manager_1.html">新书入库</a></li>
+    					<li><a href="manager_2.html">办理借书证</a></li>
+    					<li><a href="manager_3.html">图书借阅</a></li>
+    					<li><a href="manager_4.html">图书归还</a></li>
+    					<li><a href="manager_5.html">查看图书或读者信息</a></li>
+    					<li><a href="manager_6.html">修改读者信息</a></li>
+    					<li><a href="manager_7.html" >修改图书信息</a></li>
+    					<li><a href="manager_8.html">图书丢失</a></li>
+    					<li><a href="manager_9.html">借书证丢失</a></li>
+    					<li><a href="manager_10.html">逾期未还图书</a></li>
+                        <li><a href="manager_11.html" style="background:red;">读者预约图书</a></li>
+    				</ul>
+    			</div>
+    			<div id="right">
+    				<table  id='reader_info'>
+                        <tr id="thead">
+                        <td>读者姓名</td>
+                        <td>书名</td>
+                        <td>预约时间</td>
+                        <td>操作</td>
+                        </tr>
+                    </table>
+                </div>
+    			</div>
+    		
+    		<div class="clr"></div>
+    		<div id ="footer">
+    			<p>地址：北京市海淀区上园村3号北京交通大学信息中心　邮编：100044　</p>
+    		</div>
+    	</div>
+<script type="text/javascript">
+     $(function(){
+        $.ajax({
+                    url:'manager_11.php',
+                    type:'get',
+                    success:function(data){
+                        $('table[id=reader_info]').append(data);
+                    }
+                });
+            })
+     $('#right').on('click','.reset',function(){
+        var reader_name = $(this).parent().parent().children().filter(':first').html();
+        var book_name = $(this).parent().parent().children().filter(':eq(1)').html();
+        alert(book_name);
+        var sendData ={'reader_name':reader_name,'book_name':book_name};
+               $.ajax({
+                    url:'manager_11_reset.php',
+                    type:'post',
+                    data:sendData,
+                    success:function(data){
+                        window.location.reload();
+                        if(data == 'success'){
+                            window.location.reload();
+                            alert('该图书释放成功');
+                        }else if(data == 'failure'){
+                            alert('该图书释放失败，请重试');
+                        }else{
+                            alert(data);
+                        }
+                        
+                    }
+                });
+    });
+
+</script>
+    </body>
+</html>

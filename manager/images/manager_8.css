@@ -1,0 +1,17 @@
+.pad{
+	height: 130px;
+}
+#right ul{
+	height: 300px;
+}
+
+#right li{
+		color: black;
+		font-size: 18px;
+		font-family: '微软雅黑';
+		display: block;
+		width: 735px;
+		height: 45px;
+		line-height:60px;
+		text-align:center;
+}

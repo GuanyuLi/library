@@ -1,0 +1,29 @@
+table{
+	width: 750px;
+	border: 1px solid #abcdef;
+}
+tr{
+	height: 30px;
+}
+td{
+	border: 1px solid #abcdef;
+	text-align: center;
+}
+#popDiv{
+	width: 500px;
+	padding: 10px;
+	border: 1px solid red;	
+	position: absolute;
+	left: 55%;
+	margin-left: -250px;
+	top:250px;
+	background: #fff;
+	display: none;
+	z-index: 4;
+}
+#popDiv p{
+	border-bottom: 1px solid #fff;
+	text-align: center;
+	line-height: 23px;
+}
+

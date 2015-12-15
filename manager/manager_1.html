@@ -1,0 +1,88 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="zh-CN">
+<head>
+<title>管理员管理</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="description" />
+<link rel="stylesheet" href="./reset.css" />
+<link rel="stylesheet" href="./images/li.css" />
+<link rel="stylesheet" href="./images/manger_1.css" />
+<script type="text/javascript" src='jquery.js'></script>
+</head>
+    <body>
+        <form id="form">
+    	<div id="container">
+    		<div id="header">
+                <p><a href="http://guanyu.com/">[注销登陆]</a></p>
+    			<p>Welcome,manager!<p>
+                <div class="clr"></div>
+    			<h1>后台图书管理系统</h1>
+    		</div>
+    		<div id ="main">
+    			<div id="left">
+    				<ul>
+    					<li><a href="manager_1.html" style="background:red;">新书入库</a></li>
+    					<li><a href="manager_2.html">办理借书证</a></li>
+    					<li><a href="manager_3.html">图书借阅</a></li>
+    					<li><a href="manager_4.html">图书归还</a></li>
+    					<li><a href="manager_5.html">查看图书或读者信息</a></li>
+    					<li><a href="manager_6.html">修改读者信息</a></li>
+    					<li><a href="manager_7.html">修改图书信息</a></li>
+    					<li><a href="manager_8.html">图书丢失</a></li>
+    					<li><a href="manager_9.html">借书证丢失</a></li>
+    					<li><a href="manager_10.html">逾期未还图书</a></li>
+                        <li><a href="manager_11.html">读者预约图书</a></li>
+    				</ul>
+    			</div>
+    			<div id="right">
+    				<ul>
+                        <li><span class='item'>图书编号</span>
+                            <span class='input'><input type="text" name="book_id" class="form-input"/></span></li>
+                        <li><span class='item'>书&nbsp;&nbsp;&nbsp;名&nbsp;&nbsp;&nbsp;</span>
+                            <span class='input'><input type="text" name="book_name" class="form-input"/></span></li>
+                        <li><span class='item'>作&nbsp;&nbsp;&nbsp;者&nbsp;&nbsp;&nbsp;</span>
+                            <span class='input'><input type="text" name="author" class="form-input"/></span></li>
+                        <li><span class='item'>出版社&nbsp;&nbsp;&nbsp;</span>
+                            <span class='input'><input type="text" name="publishing" class="form-input"/></span></li>
+                        <li><span class='item'>类&nbsp;&nbsp;&nbsp;别&nbsp;&nbsp;&nbsp;</span>
+                            <span class='input'><input type="text" name="category_id" class="form-input"/></span></li>
+                        <li><span class='item'>单&nbsp;&nbsp;&nbsp;价&nbsp;&nbsp;&nbsp;</span>
+                            <span class='input'><input type="num" name="price" class="form-input" min='0'/></span></li>
+                        <li><span class='item'>入库时间</span>
+                            <span class='input'><input type="date" name="date_in" class="form-input" style="width:180px;"/></span></li>
+                        <li><span class='item'>入库数量</span>
+                            <span class='input'><input type="text" name="quality_in" class="form-input"/></span></li>
+                        <li><input type="button" class="btn" value="提交"/></li>
+                    </ul>
+    			</div>
+    		</div>
+    		<div class="clr"></div>
+    		<div id ="footer">
+    			<p>地址：北京市海淀区上园村3号北京交通大学信息中心　邮编：100044　</p>
+    		</div>
+    	</div>
+        </form>
+        <script type="text/javascript">
+             $('input[type=button]').click(function(){
+                var sendData = $('#form').serialize();
+               $.ajax({
+                    url:'manager_1.php',
+                    type:'post',
+                    data:sendData,
+                    success:function(data){
+                        if (data =='negative') {
+                            alert('输入有误，不能存在负数');
+                        }else if(data == 'success'){
+                            alert('入库成功');
+                        }else if(data == 'failure'){
+                            alert('入库失败，请重试');
+                        }else{
+                            alert(data);
+                        }
+                        
+                    }
+                });
+            });
+        </script>
+    </body>
+</html>

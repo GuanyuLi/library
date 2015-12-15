@@ -1,0 +1,26 @@
+#right p{
+	display: inline;
+}
+#item{
+	text-align: left;
+}
+#choice{
+	text-align: left;
+}
+
+#search{
+	display: none;
+}
+#search .three{
+	width:105px;
+}
+#show table{
+	
+	border: 1px solid #abcdef;
+}
+#show td{
+	text-align: center;
+	width:75px;
+	height: 30px;
+	border: 1px solid #abcdef;
+}

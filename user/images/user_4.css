@@ -1,0 +1,10 @@
+#listOfOrderBook{
+	border: 2px solid #abcdef;
+	margin: 50px auto;
+}
+#listOfOrderBook td{
+	text-align: center;
+	width:200px;
+	height: 40px;
+	border: 1px solid #abcdef;
+}

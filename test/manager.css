@@ -1,0 +1,35 @@
+#container{
+	width: 1000px;
+	margin: 0 auto;
+	background: url(background.jpg);
+}
+#header{
+	height: 150px;
+	text-align: left;
+}
+#header .padding{
+	height: 55px;
+}
+#header p{
+	text-align: center;
+	font-size: 35px;
+}
+#main{
+	height: 500px;
+}
+#main ul{
+	border: 1px solid #adcfea;
+	text-align: center;
+	background: #EEE;
+}
+#main ul li{
+	border: 1px solid #adcfea;
+	display: inline;
+	line-height: 30px;
+	font-size: 17px;
+	
+}
+#footer{
+	height: 100px;
+
+}
